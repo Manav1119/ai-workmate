@@ -1,0 +1,118 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  ADMIN_DATABASE_URL: postgresql+psycopg://postgres:postgres@localhost:5432/workmate
+  APP_DATABASE_URL: postgresql+psycopg://workmate_app:ci_app_pw@localhost:5432/workmate
+  READONLY_DATABASE_URL: postgresql+psycopg://workmate_reader:ci_reader_pw@localhost:5432/workmate
+  JWT_SECRET: ci-only-secret-0123456789abcdefghijklmnop
+  LLM_PROVIDER: none
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 3s --health-retries 20
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: backend/requirements*.txt
+      - run: pip install -r requirements-dev.txt
+      - name: Unit + integration tests (real Postgres, read-only role, RLS)
+        run: python -m pytest -q
+      - name: Seed demo database and run the evaluation benchmark (demo mode)
+        run: |
+          python -m scripts.bootstrap_db
+          python -m seed.load
+          python -m eval.run_eval
+      - uses: actions/upload-artifact@v4
+        with:
+          name: eval-results
+          path: backend/eval/results/
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+
+  e2e:
+    runs-on: ubuntu-latest
+    needs: [backend, frontend]
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 3s --health-retries 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Start API
+        working-directory: backend
+        run: |
+          pip install -r requirements.txt
+          python -m scripts.bootstrap_db
+          python -m seed.load
+          nohup uvicorn app.main:app --port 8000 > api.log 2>&1 &
+      - name: Build and start web
+        working-directory: frontend
+        run: |
+          npm ci
+          npm run build
+          nohup npx next start -p 3000 > web.log 2>&1 &
+          npx playwright install --with-deps chromium
+          npx wait-on -t 60000 http://localhost:3000/login http://localhost:8000/health
+      - name: Playwright
+        working-directory: frontend
+        run: npx playwright test
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-debug
+          path: |
+            frontend/test-results/
+            backend/api.log
+            frontend/web.log
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cp .env.example .env
+      - run: docker compose build
