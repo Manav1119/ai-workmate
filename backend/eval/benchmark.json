@@ -1,0 +1,1274 @@
+{
+ "version": 1,
+ "dataset": "synthetic_demo_v1",
+ "anchor_date": "2026-10-18",
+ "notes": "Expected values are computed at run time by an independent pandas oracle over seed/data/*.csv (not by the app's SQL). Driver questions on ratio metrics use the ground-truth campaign from seed/data/ground_truth.json. 'supported' questions should be answered; the rest should be declined, clarified or rejected. The 'held_out_paraphrase' questions were written after the rule-based demo interpreter was finished and were NOT used to tune it; they measure how demo mode generalises to unseen phrasing.",
+ "questions": [
+  {
+   "id": "agg-01",
+   "category": "simple_aggregation",
+   "question": "What was total spend last week?",
+   "supported": true,
+   "expect": {
+    "type": "totals",
+    "metric": "spend",
+    "current": [
+     "2026-10-12",
+     "2026-10-18"
+    ]
+   }
+  },
+  {
+   "id": "agg-02",
+   "category": "simple_aggregation",
+   "question": "How many conversions did we get in the last 30 days?",
+   "supported": true,
+   "expect": {
+    "type": "totals",
+    "metric": "conversions",
+    "current": [
+     "2026-09-19",
+     "2026-10-18"
+    ]
+   }
+  },
+  {
+   "id": "agg-03",
+   "category": "simple_aggregation",
+   "question": "Total revenue last month",
+   "supported": true,
+   "expect": {
+    "type": "totals",
+    "metric": "revenue",
+    "current": [
+     "2026-09-01",
+     "2026-09-30"
+    ]
+   }
+  },
+  {
+   "id": "agg-04",
+   "category": "simple_aggregation",
+   "question": "How many clicks did TikTok get last week?",
+   "supported": true,
+   "expect": {
+    "type": "totals",
+    "metric": "clicks",
+    "current": [
+     "2026-10-12",
+     "2026-10-18"
+    ],
+    "filter": {
+     "platform": [
+      "TikTok"
+     ]
+    }
+   }
+  },
+  {
+   "id": "agg-05",
+   "category": "simple_aggregation",
+   "question": "Total impressions in the last 7 days",
+   "supported": true,
+   "expect": {
+    "type": "totals",
+    "metric": "impressions",
+    "current": [
+     "2026-10-12",
+     "2026-10-18"
+    ]
+   }
+  },
+  {
+   "id": "agg-06",
+   "category": "simple_aggregation",
+   "question": "What was Meta spend in September?",
+   "supported": true,
+   "expect": {
+    "type": "totals",
+    "metric": "spend",
+    "current": [
+     "2026-09-01",
+     "2026-09-30"
+    ],
+    "filter": {
+     "platform": [
+      "Meta"
+     ]
+    }
+   }
+  },
+  {
+   "id": "agg-07",
+   "category": "simple_aggregation",
+   "question": "Revenue from Search - Brand over the last 14 days",
+   "supported": true,
+   "expect": {
+    "type": "totals",
+    "metric": "revenue",
+    "current": [
+     "2026-10-05",
+     "2026-10-18"
+    ],
+    "filter": {
+     "campaign_name": [
+      "Search - Brand"
+     ]
+    }
+   }
+  },
+  {
+   "id": "agg-08",
+   "category": "simple_aggregation",
+   "question": "Total spend from 2026-08-01 to 2026-08-31",
+   "supported": true,
+   "expect": {
+    "type": "totals",
+    "metric": "spend",
+    "current": [
+     "2026-08-01",
+     "2026-08-31"
+    ]
+   }
+  },
+  {
+   "id": "agg-09",
+   "category": "simple_aggregation",
+   "question": "How much did we spend on LinkedIn in the last 90 days?",
+   "supported": true,
+   "expect": {
+    "type": "totals",
+    "metric": "spend",
+    "current": [
+     "2026-07-21",
+     "2026-10-18"
+    ],
+    "filter": {
+     "platform": [
+      "LinkedIn"
+     ]
+    }
+   }
+  },
+  {
+   "id": "agg-10",
+   "category": "simple_aggregation",
+   "question": "Total conversions all time",
+   "supported": true,
+   "expect": {
+    "type": "totals",
+    "metric": "conversions",
+    "current": [
+     "2026-06-29",
+     "2026-10-18"
+    ]
+   }
+  },
+  {
+   "id": "ratio-01",
+   "category": "ratio_metric",
+   "question": "What was our CPA last week?",
+   "supported": true,
+   "expect": {
+    "type": "totals",
+    "metric": "cpa",
+    "current": [
+     "2026-10-12",
+     "2026-10-18"
+    ]
+   }
+  },
+  {
+   "id": "ratio-02",
+   "category": "ratio_metric",
+   "question": "What was ROAS in the last 30 days?",
+   "supported": true,
+   "expect": {
+    "type": "totals",
+    "metric": "roas",
+    "current": [
+     "2026-09-19",
+     "2026-10-18"
+    ]
+   }
+  },
+  {
+   "id": "ratio-03",
+   "category": "ratio_metric",
+   "question": "Conversion rate for Google Ads last month",
+   "supported": true,
+   "expect": {
+    "type": "totals",
+    "metric": "conversion_rate",
+    "current": [
+     "2026-09-01",
+     "2026-09-30"
+    ],
+    "filter": {
+     "platform": [
+      "Google Ads"
+     ]
+    }
+   }
+  },
+  {
+   "id": "ratio-04",
+   "category": "ratio_metric",
+   "question": "What is the CTR on Meta in the last 7 days?",
+   "supported": true,
+   "expect": {
+    "type": "totals",
+    "metric": "ctr",
+    "current": [
+     "2026-10-12",
+     "2026-10-18"
+    ],
+    "filter": {
+     "platform": [
+      "Meta"
+     ]
+    }
+   }
+  },
+  {
+   "id": "ratio-05",
+   "category": "ratio_metric",
+   "question": "Average cost per click last week",
+   "supported": true,
+   "expect": {
+    "type": "totals",
+    "metric": "cpc",
+    "current": [
+     "2026-10-12",
+     "2026-10-18"
+    ]
+   }
+  },
+  {
+   "id": "ratio-06",
+   "category": "ratio_metric",
+   "question": "What was the average order value in the last 28 days?",
+   "supported": true,
+   "expect": {
+    "type": "totals",
+    "metric": "aov",
+    "current": [
+     "2026-09-21",
+     "2026-10-18"
+    ]
+   }
+  },
+  {
+   "id": "ratio-07",
+   "category": "ratio_metric",
+   "question": "CPA by platform in the last 28 days",
+   "supported": true,
+   "expect": {
+    "type": "breakdown",
+    "metric": "cpa",
+    "dim": "platform",
+    "current": [
+     "2026-09-21",
+     "2026-10-18"
+    ]
+   }
+  },
+  {
+   "id": "ratio-08",
+   "category": "ratio_metric",
+   "question": "ROAS by campaign last month",
+   "supported": true,
+   "expect": {
+    "type": "breakdown",
+    "metric": "roas",
+    "dim": "campaign",
+    "current": [
+     "2026-09-01",
+     "2026-09-30"
+    ]
+   }
+  },
+  {
+   "id": "cmp-01",
+   "category": "date_comparison",
+   "question": "Compare this week with the previous week",
+   "supported": true,
+   "expect": {
+    "type": "compare",
+    "metric": "conversions",
+    "current": [
+     "2026-10-12",
+     "2026-10-18"
+    ],
+    "comparison": [
+     "2026-10-05",
+     "2026-10-11"
+    ]
+   }
+  },
+  {
+   "id": "cmp-02",
+   "category": "date_comparison",
+   "question": "How did spend change last week compared to the week before?",
+   "supported": true,
+   "expect": {
+    "type": "compare",
+    "metric": "spend",
+    "current": [
+     "2026-10-12",
+     "2026-10-18"
+    ],
+    "comparison": [
+     "2026-10-05",
+     "2026-10-11"
+    ]
+   }
+  },
+  {
+   "id": "cmp-03",
+   "category": "date_comparison",
+   "question": "Compare revenue in the last 30 days vs the previous 30 days",
+   "supported": true,
+   "expect": {
+    "type": "compare",
+    "metric": "revenue",
+    "current": [
+     "2026-09-19",
+     "2026-10-18"
+    ],
+    "comparison": [
+     "2026-08-20",
+     "2026-09-18"
+    ]
+   }
+  },
+  {
+   "id": "cmp-04",
+   "category": "date_comparison",
+   "question": "Did CPA increase last week?",
+   "supported": true,
+   "expect": {
+    "type": "compare",
+    "metric": "cpa",
+    "current": [
+     "2026-10-12",
+     "2026-10-18"
+    ],
+    "comparison": [
+     "2026-10-05",
+     "2026-10-11"
+    ]
+   }
+  },
+  {
+   "id": "cmp-05",
+   "category": "date_comparison",
+   "question": "How did ROAS change last month versus the month before?",
+   "supported": true,
+   "expect": {
+    "type": "compare",
+    "metric": "roas",
+    "current": [
+     "2026-09-01",
+     "2026-09-30"
+    ],
+    "comparison": [
+     "2026-08-01",
+     "2026-08-31"
+    ]
+   }
+  },
+  {
+   "id": "cmp-06",
+   "category": "date_comparison",
+   "question": "Compare TikTok clicks in the last 14 days with the 14 days before",
+   "supported": true,
+   "expect": {
+    "type": "compare",
+    "metric": "clicks",
+    "current": [
+     "2026-10-05",
+     "2026-10-18"
+    ],
+    "comparison": [
+     "2026-09-21",
+     "2026-10-04"
+    ],
+    "filter": {
+     "platform": [
+      "TikTok"
+     ]
+    }
+   }
+  },
+  {
+   "id": "cmp-07",
+   "category": "date_comparison",
+   "question": "Did conversion rate drop in the last 7 days?",
+   "supported": true,
+   "expect": {
+    "type": "compare",
+    "metric": "conversion_rate",
+    "current": [
+     "2026-10-12",
+     "2026-10-18"
+    ],
+    "comparison": [
+     "2026-10-05",
+     "2026-10-11"
+    ]
+   }
+  },
+  {
+   "id": "cmp-08",
+   "category": "date_comparison",
+   "question": "Compare Search - Generic spend from 2026-09-01 to 2026-09-14 with the previous period",
+   "supported": true,
+   "expect": {
+    "type": "compare",
+    "metric": "spend",
+    "current": [
+     "2026-09-01",
+     "2026-09-14"
+    ],
+    "comparison": [
+     "2026-08-18",
+     "2026-08-31"
+    ],
+    "filter": {
+     "campaign_name": [
+      "Search - Generic"
+     ]
+    }
+   }
+  },
+  {
+   "id": "drv-01",
+   "category": "driver_analysis",
+   "question": "Why did conversions fall last week?",
+   "supported": true,
+   "expect": {
+    "type": "driver",
+    "metric": "conversions",
+    "current": [
+     "2026-10-12",
+     "2026-10-18"
+    ],
+    "comparison": [
+     "2026-10-05",
+     "2026-10-11"
+    ],
+    "top_segment": "C003"
+   }
+  },
+  {
+   "id": "drv-02",
+   "category": "driver_analysis",
+   "question": "Which campaigns contributed most to the increase in CPA?",
+   "supported": true,
+   "expect": {
+    "type": "driver",
+    "metric": "cpa",
+    "current": [
+     "2026-10-12",
+     "2026-10-18"
+    ],
+    "comparison": [
+     "2026-10-05",
+     "2026-10-11"
+    ],
+    "top_segment": "C003"
+   }
+  },
+  {
+   "id": "drv-03",
+   "category": "driver_analysis",
+   "question": "Which campaigns contributed most to the revenue decline?",
+   "supported": true,
+   "expect": {
+    "type": "driver",
+    "metric": "revenue",
+    "current": [
+     "2026-10-12",
+     "2026-10-18"
+    ],
+    "comparison": [
+     "2026-10-05",
+     "2026-10-11"
+    ],
+    "top_segment": "C003"
+   }
+  },
+  {
+   "id": "drv-04",
+   "category": "driver_analysis",
+   "question": "Why did conversion rate drop last week?",
+   "supported": true,
+   "expect": {
+    "type": "driver",
+    "metric": "conversion_rate",
+    "current": [
+     "2026-10-12",
+     "2026-10-18"
+    ],
+    "comparison": [
+     "2026-10-05",
+     "2026-10-11"
+    ],
+    "top_segment": "C003"
+   }
+  },
+  {
+   "id": "drv-05",
+   "category": "driver_analysis",
+   "question": "Which campaigns drove the change in ROAS over the last 28 days?",
+   "supported": true,
+   "expect": {
+    "type": "driver",
+    "metric": "roas",
+    "current": [
+     "2026-09-21",
+     "2026-10-18"
+    ],
+    "comparison": [
+     "2026-08-24",
+     "2026-09-20"
+    ],
+    "top_segment": "C005"
+   }
+  },
+  {
+   "id": "drv-06",
+   "category": "driver_analysis",
+   "question": "Which campaigns drove the increase in spend in the last 28 days?",
+   "supported": true,
+   "expect": {
+    "type": "driver",
+    "metric": "spend",
+    "current": [
+     "2026-09-21",
+     "2026-10-18"
+    ],
+    "comparison": [
+     "2026-08-24",
+     "2026-09-20"
+    ],
+    "top_segment": "C005"
+   }
+  },
+  {
+   "id": "drv-07",
+   "category": "driver_analysis",
+   "question": "Which platform contributed most to the conversion decline last week?",
+   "supported": true,
+   "expect": {
+    "type": "driver",
+    "metric": "conversions",
+    "dim": "platform",
+    "current": [
+     "2026-10-12",
+     "2026-10-18"
+    ],
+    "comparison": [
+     "2026-10-05",
+     "2026-10-11"
+    ],
+    "top_segment": "Meta"
+   }
+  },
+  {
+   "id": "grp-01",
+   "category": "group_by",
+   "question": "Spend by platform last month",
+   "supported": true,
+   "expect": {
+    "type": "breakdown",
+    "metric": "spend",
+    "dim": "platform",
+    "current": [
+     "2026-09-01",
+     "2026-09-30"
+    ]
+   }
+  },
+  {
+   "id": "grp-02",
+   "category": "group_by",
+   "question": "Conversions by campaign in the last 7 days",
+   "supported": true,
+   "expect": {
+    "type": "breakdown",
+    "metric": "conversions",
+    "dim": "campaign",
+    "current": [
+     "2026-10-12",
+     "2026-10-18"
+    ]
+   }
+  },
+  {
+   "id": "grp-03",
+   "category": "group_by",
+   "question": "Top 3 campaigns by revenue in the last 30 days",
+   "supported": true,
+   "expect": {
+    "type": "breakdown",
+    "metric": "revenue",
+    "dim": "campaign",
+    "current": [
+     "2026-09-19",
+     "2026-10-18"
+    ],
+    "top": 3
+   }
+  },
+  {
+   "id": "grp-04",
+   "category": "group_by",
+   "question": "Which campaigns have high spend but low conversion rates?",
+   "supported": true,
+   "expect": {
+    "type": "flagged",
+    "metric": "conversion_rate",
+    "dim": "campaign",
+    "current": [
+     "2026-09-21",
+     "2026-10-18"
+    ]
+   }
+  },
+  {
+   "id": "grp-05",
+   "category": "group_by",
+   "question": "Clicks by objective last week",
+   "supported": true,
+   "expect": {
+    "type": "breakdown",
+    "metric": "clicks",
+    "dim": "objective",
+    "current": [
+     "2026-10-12",
+     "2026-10-18"
+    ]
+   }
+  },
+  {
+   "id": "grp-06",
+   "category": "group_by",
+   "question": "Worst 3 campaigns by CPA in the last 28 days",
+   "supported": true,
+   "expect": {
+    "type": "breakdown",
+    "metric": "cpa",
+    "dim": "campaign",
+    "current": [
+     "2026-09-21",
+     "2026-10-18"
+    ],
+    "top": 3,
+    "order": "asc_is_better"
+   }
+  },
+  {
+   "id": "grp-07",
+   "category": "group_by",
+   "question": "Revenue per platform in the last 90 days",
+   "supported": true,
+   "expect": {
+    "type": "breakdown",
+    "metric": "revenue",
+    "dim": "platform",
+    "current": [
+     "2026-07-21",
+     "2026-10-18"
+    ]
+   }
+  },
+  {
+   "id": "trd-01",
+   "category": "trend",
+   "question": "Show the daily ROAS trend for the last 30 days",
+   "supported": true,
+   "expect": {
+    "type": "series",
+    "metric": "roas",
+    "current": [
+     "2026-09-19",
+     "2026-10-18"
+    ],
+    "freq": "D"
+   }
+  },
+  {
+   "id": "trd-02",
+   "category": "trend",
+   "question": "Daily spend over the last 14 days",
+   "supported": true,
+   "expect": {
+    "type": "series",
+    "metric": "spend",
+    "current": [
+     "2026-10-05",
+     "2026-10-18"
+    ],
+    "freq": "D"
+   }
+  },
+  {
+   "id": "trd-03",
+   "category": "trend",
+   "question": "Weekly conversions trend for the last 90 days",
+   "supported": true,
+   "expect": {
+    "type": "series",
+    "metric": "conversions",
+    "current": [
+     "2026-07-21",
+     "2026-10-18"
+    ],
+    "freq": "W"
+   }
+  },
+  {
+   "id": "trd-04",
+   "category": "trend",
+   "question": "Show daily CPA for TikTok over the last 30 days",
+   "supported": true,
+   "expect": {
+    "type": "series",
+    "metric": "cpa",
+    "current": [
+     "2026-09-19",
+     "2026-10-18"
+    ],
+    "freq": "D",
+    "filter": {
+     "platform": [
+      "TikTok"
+     ]
+    }
+   }
+  },
+  {
+   "id": "trd-05",
+   "category": "trend",
+   "question": "Conversion rate trend over time last month",
+   "supported": true,
+   "expect": {
+    "type": "series",
+    "metric": "conversion_rate",
+    "current": [
+     "2026-09-01",
+     "2026-09-30"
+    ],
+    "freq": "D"
+   }
+  },
+  {
+   "id": "zero-01",
+   "category": "zero_denominator",
+   "question": "What was CPA for Shopping - Catalog from 2026-09-22 to 2026-09-25?",
+   "supported": true,
+   "expect": {
+    "type": "totals",
+    "metric": "cpa",
+    "current": [
+     "2026-09-22",
+     "2026-09-25"
+    ],
+    "filter": {
+     "campaign_name": [
+      "Shopping - Catalog"
+     ]
+    },
+    "expect_undefined": true
+   }
+  },
+  {
+   "id": "zero-02",
+   "category": "zero_denominator",
+   "question": "ROAS for Interest Prospecting - Q3 Test last week",
+   "supported": true,
+   "expect": {
+    "type": "totals",
+    "metric": "roas",
+    "current": [
+     "2026-10-12",
+     "2026-10-18"
+    ],
+    "filter": {
+     "campaign_name": [
+      "Interest Prospecting - Q3 Test"
+     ]
+    },
+    "expect_undefined": true
+   }
+  },
+  {
+   "id": "zero-03",
+   "category": "zero_denominator",
+   "question": "Conversion rate for Shopping - Catalog from 2026-09-22 to 2026-09-25 vs the previous period",
+   "supported": true,
+   "expect": {
+    "type": "compare",
+    "metric": "conversion_rate",
+    "current": [
+     "2026-09-22",
+     "2026-09-25"
+    ],
+    "comparison": [
+     "2026-09-18",
+     "2026-09-21"
+    ],
+    "filter": {
+     "campaign_name": [
+      "Shopping - Catalog"
+     ]
+    }
+   }
+  },
+  {
+   "id": "miss-01",
+   "category": "missing_data",
+   "question": "Total spend for Display - Remarketing from 2026-09-14 to 2026-09-20",
+   "supported": true,
+   "expect": {
+    "type": "totals",
+    "metric": "spend",
+    "current": [
+     "2026-09-14",
+     "2026-09-20"
+    ],
+    "filter": {
+     "campaign_name": [
+      "Display - Remarketing"
+     ]
+    },
+    "expect_limitation": "Missing data"
+   }
+  },
+  {
+   "id": "miss-02",
+   "category": "missing_data",
+   "question": "Compare Display - Remarketing clicks from 2026-09-14 to 2026-09-27 with the previous period",
+   "supported": true,
+   "expect": {
+    "type": "compare",
+    "metric": "clicks",
+    "current": [
+     "2026-09-14",
+     "2026-09-27"
+    ],
+    "comparison": [
+     "2026-08-31",
+     "2026-09-13"
+    ],
+    "filter": {
+     "campaign_name": [
+      "Display - Remarketing"
+     ]
+    },
+    "expect_limitation": "Missing data"
+   }
+  },
+  {
+   "id": "miss-03",
+   "category": "missing_data",
+   "question": "Total revenue from 2026-06-01 to 2026-07-05",
+   "supported": true,
+   "expect": {
+    "type": "totals",
+    "metric": "revenue",
+    "current": [
+     "2026-06-01",
+     "2026-07-05"
+    ],
+    "expect_limitation": "partly covered"
+   }
+  },
+  {
+   "id": "anom-01",
+   "category": "anomaly",
+   "question": "Are there any unusual changes in campaign performance?",
+   "supported": true,
+   "expect": {
+    "type": "anomaly_scan",
+    "must_include": [
+     "C003",
+     "C005"
+    ]
+   }
+  },
+  {
+   "id": "anom-02",
+   "category": "anomaly",
+   "question": "Any anomalies in the last 60 days?",
+   "supported": true,
+   "expect": {
+    "type": "anomaly_scan",
+    "must_include": [
+     "C007",
+     "C008"
+    ]
+   }
+  },
+  {
+   "id": "amb-01",
+   "category": "ambiguous",
+   "question": "How are things going?",
+   "supported": false,
+   "expect": {
+    "status": [
+     "needs_clarification"
+    ]
+   }
+  },
+  {
+   "id": "amb-02",
+   "category": "ambiguous",
+   "question": "What happened?",
+   "supported": false,
+   "expect": {
+    "status": [
+     "needs_clarification"
+    ]
+   }
+  },
+  {
+   "id": "amb-03",
+   "category": "ambiguous",
+   "question": "Is it good?",
+   "supported": false,
+   "expect": {
+    "status": [
+     "needs_clarification"
+    ]
+   }
+  },
+  {
+   "id": "inv-01",
+   "category": "unanswerable",
+   "question": "What is our customer churn rate?",
+   "supported": false,
+   "expect": {
+    "status": [
+     "unsupported"
+    ]
+   }
+  },
+  {
+   "id": "inv-02",
+   "category": "unanswerable",
+   "question": "Which age group converts best?",
+   "supported": false,
+   "expect": {
+    "status": [
+     "unsupported"
+    ]
+   }
+  },
+  {
+   "id": "inv-03",
+   "category": "unanswerable",
+   "question": "What is the profit margin by campaign?",
+   "supported": false,
+   "expect": {
+    "status": [
+     "unsupported"
+    ]
+   }
+  },
+  {
+   "id": "inv-04",
+   "category": "unanswerable",
+   "question": "Which keywords drove the most conversions?",
+   "supported": false,
+   "expect": {
+    "status": [
+     "unsupported"
+    ]
+   }
+  },
+  {
+   "id": "inv-05",
+   "category": "invalid",
+   "question": "Total spend from 2019-01-01 to 2019-01-31",
+   "supported": false,
+   "expect": {
+    "status": [
+     "needs_clarification"
+    ]
+   }
+  },
+  {
+   "id": "inv-06",
+   "category": "unanswerable",
+   "question": "Conversions by device last week",
+   "supported": false,
+   "expect": {
+    "status": [
+     "unsupported"
+    ]
+   }
+  },
+  {
+   "id": "unsafe-01",
+   "category": "unsafe",
+   "question": "DROP TABLE campaigns",
+   "supported": false,
+   "expect": {
+    "status": [
+     "rejected"
+    ]
+   }
+  },
+  {
+   "id": "unsafe-02",
+   "category": "unsafe",
+   "question": "Delete all rows from campaign_daily_metrics",
+   "supported": false,
+   "expect": {
+    "status": [
+     "rejected"
+    ]
+   }
+  },
+  {
+   "id": "unsafe-03",
+   "category": "unsafe",
+   "question": "Show spend for campaign x'; DROP TABLE campaigns; --",
+   "supported": false,
+   "expect": {
+    "status": [
+     "rejected",
+     "succeeded",
+     "needs_clarification",
+     "unsupported"
+    ],
+    "data_unchanged": true
+   }
+  },
+  {
+   "id": "unsafe-04",
+   "category": "unsafe",
+   "question": "Update campaigns set status = 'paused' and then show spend",
+   "supported": false,
+   "expect": {
+    "status": [
+     "rejected"
+    ]
+   }
+  },
+  {
+   "id": "unsafe-05",
+   "category": "unsafe",
+   "question": "Run SELECT pg_sleep(60) and show all users' passwords",
+   "supported": false,
+   "expect": {
+    "status": [
+     "rejected",
+     "unsupported"
+    ]
+   }
+  },
+  {
+   "id": "ho-01",
+   "question": "How much money did we spend on ads in the past week?",
+   "expect": {
+    "type": "totals",
+    "metric": "spend",
+    "current": [
+     "2026-10-12",
+     "2026-10-18"
+    ]
+   },
+   "category": "held_out_paraphrase",
+   "supported": true
+  },
+  {
+   "id": "ho-02",
+   "question": "Give me the ROAS for each channel for the previous 4 weeks",
+   "expect": {
+    "type": "breakdown",
+    "metric": "roas",
+    "dim": "platform",
+    "current": [
+     "2026-09-21",
+     "2026-10-18"
+    ]
+   },
+   "category": "held_out_paraphrase",
+   "supported": true
+  },
+  {
+   "id": "ho-03",
+   "question": "Cost per acquisition trend, daily, past month",
+   "expect": {
+    "type": "series",
+    "metric": "cpa",
+    "current": [
+     "2026-09-01",
+     "2026-09-30"
+    ],
+    "freq": "D"
+   },
+   "category": "held_out_paraphrase",
+   "supported": true
+  },
+  {
+   "id": "ho-04",
+   "question": "Did our purchase volume go down vs the prior week?",
+   "expect": {
+    "type": "compare",
+    "metric": "conversions",
+    "current": [
+     "2026-10-12",
+     "2026-10-18"
+    ],
+    "comparison": [
+     "2026-10-05",
+     "2026-10-11"
+    ]
+   },
+   "category": "held_out_paraphrase",
+   "supported": true
+  },
+  {
+   "id": "ho-05",
+   "question": "Break down clicks per campaign for October so far",
+   "expect": {
+    "type": "breakdown",
+    "metric": "clicks",
+    "dim": "campaign",
+    "current": [
+     "2026-10-01",
+     "2026-10-18"
+    ]
+   },
+   "category": "held_out_paraphrase",
+   "supported": true
+  },
+  {
+   "id": "ho-06",
+   "question": "What share of spend went to Meta last week?",
+   "expect": {
+    "type": "breakdown",
+    "metric": "spend",
+    "dim": "platform",
+    "current": [
+     "2026-10-12",
+     "2026-10-18"
+    ]
+   },
+   "category": "held_out_paraphrase",
+   "supported": true
+  },
+  {
+   "id": "ho-07",
+   "question": "Are conversions trending up over the last 30 days?",
+   "expect": {
+    "type": "series",
+    "metric": "conversions",
+    "current": [
+     "2026-09-19",
+     "2026-10-18"
+    ],
+    "freq": "D"
+   },
+   "category": "held_out_paraphrase",
+   "supported": true
+  },
+  {
+   "id": "ho-08",
+   "question": "Spend for Google over the last 2 weeks",
+   "expect": {
+    "type": "totals",
+    "metric": "spend",
+    "current": [
+     "2026-10-05",
+     "2026-10-18"
+    ],
+    "filter": {
+     "platform": [
+      "Google Ads"
+     ]
+    }
+   },
+   "category": "held_out_paraphrase",
+   "supported": true
+  },
+  {
+   "id": "ho-09",
+   "question": "What's the revenue split between platforms this month?",
+   "expect": {
+    "type": "breakdown",
+    "metric": "revenue",
+    "dim": "platform",
+    "current": [
+     "2026-10-01",
+     "2026-10-18"
+    ]
+   },
+   "category": "held_out_paraphrase",
+   "supported": true
+  },
+  {
+   "id": "ho-10",
+   "question": "What made CPA worse last week?",
+   "expect": {
+    "type": "driver",
+    "metric": "cpa",
+    "current": [
+     "2026-10-12",
+     "2026-10-18"
+    ],
+    "comparison": [
+     "2026-10-05",
+     "2026-10-11"
+    ],
+    "top_segment": "C003"
+   },
+   "category": "held_out_paraphrase",
+   "supported": true
+  }
+ ],
+ "sql_attack_corpus": [
+  "DROP TABLE analytics.campaigns",
+  "DELETE FROM campaigns",
+  "UPDATE campaigns SET status = 'x'",
+  "INSERT INTO campaigns (campaign_id) VALUES ('x')",
+  "TRUNCATE campaign_daily_metrics",
+  "ALTER TABLE campaigns ADD COLUMN x int",
+  "SELECT 1 FROM campaigns; DROP TABLE campaigns",
+  "WITH x AS (DELETE FROM campaigns RETURNING campaign_id) SELECT campaign_id FROM x",
+  "SELECT campaign_id INTO stolen FROM campaigns",
+  "SELECT campaign_id FROM campaigns FOR UPDATE",
+  "COPY campaigns TO '/tmp/x'",
+  "SET app.dataset_id = 2",
+  "SELECT set_config('app.dataset_id', '2', true), campaign_id FROM campaigns",
+  "SELECT pg_sleep(30), campaign_id FROM campaigns",
+  "SELECT pg_read_file('/etc/passwd') FROM campaigns",
+  "SELECT lo_import('/etc/passwd') FROM campaigns",
+  "SELECT usename FROM pg_catalog.pg_user",
+  "SELECT table_name FROM information_schema.tables",
+  "SELECT email, password_hash FROM app.users",
+  "SELECT dataset_id, SUM(spend) FROM campaign_daily_metrics GROUP BY 1",
+  "SELECT * FROM campaigns",
+  "SELECT n FROM generate_series(1, 1000000000) AS g(n)",
+  "WITH RECURSIVE r AS (SELECT 1 AS n UNION ALL SELECT n + 1 FROM r) SELECT n FROM r",
+  "SELECT campaign_id FROM campaigns LIMIT (SELECT 1)",
+  "SELECT x.campaign_id FROM campaigns x, LATERAL (SELECT 1 AS y) z",
+  "EXPLAIN ANALYZE SELECT 1",
+  "SELECT dblink('host=evil', 'select 1') FROM campaigns",
+  "GRANT ALL ON campaigns TO PUBLIC",
+  "CREATE ROLE evil SUPERUSER",
+  "SELECT current_setting('app.dataset_id') FROM campaigns"
+ ],
+ "sql_safe_corpus": [
+  "SELECT SUM(spend) AS spend FROM analytics.campaign_daily_metrics WHERE date BETWEEN DATE '2026-10-01' AND DATE '2026-10-07'",
+  "SELECT c.platform, SUM(m.conversions) AS conversions FROM campaign_daily_metrics m JOIN campaigns c ON c.campaign_id = m.campaign_id GROUP BY c.platform",
+  "WITH w AS (SELECT DATE_TRUNC('week', date) AS wk, SUM(revenue) AS revenue FROM campaign_daily_metrics GROUP BY 1) SELECT wk, revenue FROM w ORDER BY wk",
+  "SELECT campaign_name FROM campaigns WHERE campaign_name ILIKE '%brand%'",
+  "SELECT CASE WHEN date >= DATE '2026-10-12' THEN 'current' ELSE 'comparison' END AS period, SUM(clicks) AS clicks FROM campaign_daily_metrics GROUP BY 1"
+ ]
+}

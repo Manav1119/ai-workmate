@@ -1,0 +1,90 @@
+{
+  "dataset": "synthetic_demo_v1",
+  "synthetic": true,
+  "seed": 20261018,
+  "date_range": [
+    "2026-06-29",
+    "2026-10-18"
+  ],
+  "anchor_date": "2026-10-18",
+  "scenarios": [
+    {
+      "id": "S1_conversion_decline",
+      "campaign_id": "C003",
+      "type": "performance_change",
+      "description": "Genuine conversion-rate decline on Meta 'Prospecting - Lookalike': CVR multiplied by 0.52 from 2026-10-12 while clicks are unchanged.",
+      "start": "2026-10-12",
+      "end": "2026-10-18",
+      "expected_detection_metrics": [
+        "conversion_rate",
+        "conversions",
+        "cpa",
+        "revenue",
+        "roas"
+      ],
+      "expect_anomaly": true
+    },
+    {
+      "id": "S2_spend_without_revenue",
+      "campaign_id": "C005",
+      "type": "performance_change",
+      "description": "TikTok 'Spark Ads - UGC' budget scaled 1.7x from 2026-09-28 while CVR fell to 0.62x, so revenue grows ~5% and ROAS falls ~38%.",
+      "start": "2026-09-28",
+      "end": "2026-10-18",
+      "expected_detection_metrics": [
+        "spend",
+        "clicks",
+        "roas",
+        "conversion_rate",
+        "cpa"
+      ],
+      "expect_anomaly": true
+    },
+    {
+      "id": "S3_missing_data",
+      "campaign_id": "C007",
+      "type": "data_quality",
+      "description": "No rows delivered for 'Display - Remarketing' 2026-09-14..2026-09-20 (simulated pipeline outage). The campaign was running.",
+      "start": "2026-09-14",
+      "end": "2026-09-20",
+      "expected_detection_metrics": [
+        "missing_data"
+      ],
+      "expect_anomaly": true
+    },
+    {
+      "id": "S4_tracking_discrepancy",
+      "campaign_id": "C008",
+      "type": "data_quality",
+      "description": "'Shopping - Catalog' reports 0 conversions and 0 revenue 2026-09-22..2026-09-25 while spend and clicks are normal (broken conversion tag).",
+      "start": "2026-09-22",
+      "end": "2026-09-25",
+      "expected_detection_metrics": [
+        "tracking_gap",
+        "conversions",
+        "revenue"
+      ],
+      "expect_anomaly": true
+    },
+    {
+      "id": "S5_low_volume_noise",
+      "campaign_id": "C006",
+      "type": "negative_control",
+      "description": "LinkedIn lead gen campaign with ~50 clicks/day and ~1.4 conversions/day. Ratio swings are noise; ratio-metric anomalies should be suppressed by minimum sample sizes.",
+      "start": "2026-06-29",
+      "end": "2026-10-18",
+      "expected_detection_metrics": [],
+      "expect_anomaly": false
+    },
+    {
+      "id": "S6_paused_campaign",
+      "campaign_id": "C010",
+      "type": "negative_control",
+      "description": "TikTok test campaign paused after 2026-08-31. Absence of rows afterwards is expected and must not be flagged as missing data.",
+      "start": "2026-09-01",
+      "end": "2026-10-18",
+      "expected_detection_metrics": [],
+      "expect_anomaly": false
+    }
+  ]
+}

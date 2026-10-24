@@ -1,0 +1,11 @@
+campaign_id,campaign_name,platform,objective,start_date,status
+C001,Search - Brand,Google Ads,Conversions,2026-03-01,active
+C002,Search - Generic,Google Ads,Conversions,2026-04-15,active
+C003,Prospecting - Lookalike,Meta,Conversions,2026-05-10,active
+C004,Retargeting - Cart Abandoners,Meta,Conversions,2026-05-10,active
+C005,Spark Ads - UGC,TikTok,Conversions,2026-06-01,active
+C006,Lead Gen - Decision Makers,LinkedIn,Leads,2026-06-15,active
+C007,Display - Remarketing,Google Ads,Conversions,2026-04-01,active
+C008,Shopping - Catalog,Google Ads,Sales,2026-05-01,active
+C009,Video - Awareness,Meta,Awareness,2026-06-01,active
+C010,Interest Prospecting - Q3 Test,TikTok,Conversions,2026-06-01,paused
